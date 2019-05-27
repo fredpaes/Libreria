@@ -1,3 +1,6 @@
+.DS_Store
 libreria/__pycache__/
 apps/book/__pycache__/
 apps/book/migrations/__pycache__/
+
+detail.txt
