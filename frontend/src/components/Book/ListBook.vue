@@ -3,13 +3,14 @@
     <div class="row">
       <div class="col text-left">
         <h2>Listado de libros</h2>
+        <b-button size="sm" :to="{name:'NewBook'}" variant="primary">Nuevo libro</b-button>
         <div class="col-md-12">
           <b-table striped hover :items="books" :fields="fields">
-            <template slot="action" slot-scope="data" >
-              <b-button size="sm" variant="primary">
+            <template slot="action" slot-scope="data">
+              <b-button size="sm" variant="primary" :to="{ name:'EditBook', params: {bookId: data.item.id} }">
                 Editar
               </b-button>
-              <b-button size="sm" variant="danger">
+              <b-button size="sm" variant="danger" :to="{ name:'DeleteBook', params: {bookId: data.item.id} }">
                 Eliminar
               </b-button>
             </template>
@@ -46,11 +47,11 @@
     methods: {
       getBooks() {
         const path = 'http://127.0.0.1:8000/api/v1.0/books/'
-        axios.get(path).
-          then((res) => {
+        axios.get(path)
+          .then((res) => {
             this.books = res.data
-          }).
-          catch((err) => {console.log(err)})
+          })
+          .catch((err) => {console.log(err)})
       }
     },
     created() {
